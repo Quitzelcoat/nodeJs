@@ -1,0 +1,26 @@
+<!-- views/search.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <% if (results.length > 0) { %>
+    <ul>
+      <% results.forEach(function(user) { %>
+      <li>
+        ID: <%= user.id %>, Name: <%= user.firstName %> <%= user.lastName %>,
+        Email: <%= user.email %>, Age: <%= user.age || 'N/A' %>, Bio: <%=
+        user.bio || 'N/A' %>
+      </li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p>No users found.</p>
+    <% } %>
+
+    <a href="/">Back to home</a>
+  </body>
+</html>
