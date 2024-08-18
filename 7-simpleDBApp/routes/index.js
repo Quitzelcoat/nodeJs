@@ -6,4 +6,6 @@ router.get("/", userController.getUsernames);
 router.get("/new", userController.newUserForm);
 router.post("/new", userController.saveUser);
 
+router.get("/delete", userController.deleteUsernames);
+
 module.exports = router;

@@ -1,24 +1,34 @@
 const db = require("../db/queries");
+const { getAllUsernames } = require("../db/queries");
 
-// GET / - Log available usernames
 exports.getUsernames = async (req, res) => {
-  const usernames = await db.getAllUsernames();
+  const search = req.query.search || "";
+  const usernames = await getAllUsernames(search);
   console.log("Usernames: ", usernames);
   res.send("Usernames: " + usernames.map((user) => user.username).join(", "));
 };
 
-// GET /new - Display the form
 exports.newUserForm = async (req, res) => {
   res.render("newUserForm");
 };
 
 exports.saveUser = async (req, res) => {
-  const { username } = req.body; // This should correctly retrieve the username
+  const { username } = req.body;
   try {
-    await db.insertUsername(username); // Call the insert function
-    res.redirect("/"); // Redirect after successful insertion
+    await db.insertUsername(username);
+    res.redirect("/");
   } catch (error) {
-    console.error("Error saving username: ", error); // Log the error
-    res.status(500).send("Error saving username."); // Send an error response
+    console.error("Error saving username: ", error);
+    res.status(500).send("Error saving username.");
+  }
+};
+
+exports.deleteUsernames = async (req, res) => {
+  try {
+    await db.deleteAllUsernames();
+    res.send("All usernames have been deleted");
+  } catch (error) {
+    console.log("Error deleting usernames", error);
+    res.status(500).send("Error deleting usernames.");
   }
 };
