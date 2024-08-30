@@ -10,5 +10,6 @@ npm install dotenv
 npm install passport
 npm install passport-local
 npm install bcryptjs
+npm install connect-pg-simple
 
 node <app name>
