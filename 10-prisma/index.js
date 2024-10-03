@@ -3,11 +3,13 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
-  const post = await prisma.post.update({
-    where: { id: 1 },
-    data: { published: true },
+  const user = await prisma.user.create({
+    data: {
+      email: "elsa@prisma.io",
+      name: "Elsa Prisma",
+    },
   });
-  console.log(post);
+  console.log(user);
 }
 
 main()
