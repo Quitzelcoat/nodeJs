@@ -1,21 +1,16 @@
+const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => {
-  return res.send("Received a GET HTTP method");
-});
+const { users, messages } = require("./models/index");
+const routes = require("./routes");
 
-app.post("/", (req, res) => {
-  return res.send("Received a POST HTTP method");
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.put("/", (req, res) => {
-  return res.send("Received a PUT HTTP method");
-});
-
-app.delete("/", (req, res) => {
-  return res.send("Received a DELETE HTTP method");
-});
+app.use("/users", routes.user);
+app.use("/session", routes.session);
+app.use("/messages", routes.message);
 
 const port = 3000;
 app.listen(port, () => {
