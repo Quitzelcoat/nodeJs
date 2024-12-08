@@ -15,6 +15,7 @@ npm install connect-pg-simple
 npm install prisma @prisma/client
 npm install uid2
 npm install connect-flash
+npm install supertest --save-dev
 
 npx prisma init
 
